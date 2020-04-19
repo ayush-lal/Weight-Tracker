@@ -1,7 +1,7 @@
 # Weight Tracker
 Simple Weight Tracker Web App that can write to a Database your daily weight and displays your stats based on each month.
 
-![Demo of Application](readme_files/showcase.gif)
+>![Demo of Application](readme_files/showcase.gif)
 
 ### Database Configuration
 ```sql
