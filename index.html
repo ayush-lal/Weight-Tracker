@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximal-scale=1.0,user-scalable=0 "
+    />
+    <title>Weight Tracker</title>
+    <link rel="stylesheet" href="css/bulma.css" />
+    <link rel="stylesheet" href="css/bulma-calendar.min.css" />
+    <link rel="stylesheet" href="css/custom.css" />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
+    <script src="js/bulma-calendar.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.min.js"
+      integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+      crossorigin="anonymous"
+    ></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+  </head>
+
+  <body>
+    <br />
+    <div class="container is-fluid center has-text-centered">
+      <nav class="level">
+        <!-- Left side -->
+        <div class="level-left">
+          <div class="level-item">
+            <h1 class="title">
+              <a class="titleA" href="index.html">Weight Tracker</a>
+            </h1>
+          </div>
+        </div>
+
+        <!-- Right side -->
+        <div class="level-right">
+          <p class="level-item"><a href="index.html">Home</a></p>
+          <p class="level-item">
+            <a href="ayush.php">Ayush's Stats</a>
+          </p>
+        </div>
+      </nav>
+      <br />
+
+      <br />
+      <form>
+        <div class="form-group center-test">
+          <input
+            id="weight"
+            name="weight"
+            type="text"
+            class="form-control custom-size"
+            id="formGroupExampleInput"
+            placeholder="Enter your weight"
+          />
+        </div>
+        <div class="form-group center-test">
+          <input
+            class="form-control custom-size"
+            id="weightdate"
+            name="weightdate"
+            placeholder="MM/DD/YYY"
+            type="date"
+          />
+        </div>
+        <div class="form-group center-test">
+          <select
+            name="person"
+            id="person"
+            class="browser-default custom-select custom-size"
+          >
+            <option class="tes" value="Ayush">Ayush</option>
+            <option value="Sheri">Sheri</option>
+          </select>
+        </div>
+        <div class="form-group center-test">
+          <div class="field">
+            <button
+              type="submit"
+              id="submit"
+              name="submit"
+              class="button is-primary custom-size"
+            >
+              Submit
+            </button>
+          </div>
+        </div>
+      </form>
+      <div
+        id="error_message"
+        class="tag is-danger is-light message-alert is-medium custom-size"
+      ></div>
+      <div class="center-test message-container">
+        <span
+          id="success_message"
+          class="tag is-success is-light message-alert2 is-medium custom-size"
+        ></span>
+      </div>
+    </div>
+
+    <!-- Load DatePicker -->
+    <script>
+      if (datefield.type != "date") {
+        //if browser doesn't support input type="date", initialize date picker widget:
+        jQuery(function ($) {
+          //on document.ready
+          $("#weightdate").datepicker();
+        });
+      }
+      // Initialize all input of date type.
+      const calendars = bulmaCalendar.attach('[type="date"]', options);
+      // Loop on each calendar initialized
+      calendars.forEach((calendar) => {
+        // Add listener to date:selected event
+        calendar.on("date:selected", (date) => {
+          console.log(date);
+        });
+      });
+      // To access to bulmaCalendar instance of an element
+      const element = document.querySelector("#weightdate");
+      if (element) {
+        // bulmaCalendar instance is available as element.bulmaCalendar
+        element.bulmaCalendar.on("select", (datepicker) => {
+          console.log(datepicker.data.value());
+        });
+      }
+    </script>
+
+    <!-- Begin AJAX Weight Form Submit -->
+    <script>
+      $(document).ready(function () {
+        $("#submit").click(function (e) {
+          e.preventDefault();
+          var weight = $("#weight").val();
+          var person = $("#person").val(); // You miss this
+          var weightdate = $("#weightdate").val(); // You miss this
+          if (weight == "" || person == "" || weightdate == "") {
+            $("#error_message").html("All Fields are required.");
+          } else {
+            $("#error_message").html("");
+            $.ajax({
+              url: "connection.php",
+              type: "POST",
+              data: {
+                weight: weight,
+                person: person,
+                weightdate: weightdate,
+              },
+              success: function (data) {
+                $("form").trigger("reset");
+                $("#success_message")
+                  .fadeIn()
+                  .html("Your Weight has been successfully added!");
+                setTimeout(function () {
+                  $("#success_message").fadeOut("Slow");
+                }, 2000);
+              },
+            });
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

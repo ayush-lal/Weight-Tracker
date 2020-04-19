@@ -1,0 +1,106 @@
+.content-table {
+  border-collapse: collapse;
+  margin: 25px 0;
+  min-width: 350px;
+  border-radius: 5px 5px 0 0;
+  overflow: hidden;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.content-table,
+th,
+td {
+  border: 1px solid #f4f4f4;
+  padding: 3px;
+}
+
+.title > a {
+  color: #000000;
+  text-decoration: none !important;
+}
+
+.title > a:hover {
+  color: #000000 !important;
+  text-decoration: none !important;
+}
+
+.titleA {
+  color: #000000 !important;
+}
+
+.evenbg {
+  background-color: #ffffff !important;
+}
+
+.oddbg {
+  background-color: #f3f3f3 !important;
+}
+
+.move-center {
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.center-menu {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="date"] {
+  height: 2.375rem;
+}
+
+.center-test {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 770px) {
+  .center-dropdown {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .custom-size {
+    width: 350px !important;
+  }
+}
+
+.custom-size {
+  width: 350px !important;
+}
+
+.message-alert {
+  padding: 15px !important;
+}
+
+.message-alert:empty {
+  display: none;
+}
+
+.message-alert2 {
+  padding: 15px !important;
+  text-align: center !important;
+  vertical-align: middle !important;
+  padding-bottom: 20px;
+}
+
+.message-alert2:empty {
+  display: none;
+}
+
+.message-container {
+  height: 20px !important;
+}
+
+.message-container > span {
+  line-height: 20px !important;
+  vertical-align: middle !important;
+}
